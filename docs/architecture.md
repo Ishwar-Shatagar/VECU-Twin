@@ -9,35 +9,35 @@ The architecture strictly decouples the ground-truth physical simulation (Virtua
 ```mermaid
 flowchart TD
     subgraph "Vehicle Subsystems (C++17 Engine)"
-        VM[Vehicle Physics & Mode Model] --> E1[Engine ECU]
-        VM --> E2[Brake ECU]
-        VM --> E3[Battery ECU]
-        VM --> E4[Steering ECU]
+        VM["Vehicle Physics & Mode Model"] --> E1["Engine ECU"]
+        VM --> E2["Brake ECU"]
+        VM --> E3["Battery ECU"]
+        VM --> E4["Steering ECU"]
         
-        E1 -- "0x101, 0x102, 0x103" --> CAN[Software CAN Bus Arbitration]
+        E1 -- "0x101, 0x102, 0x103" --> CAN["Software CAN Bus Arbitration"]
         E2 -- "0x201, 0x202, 0x203" --> CAN
         E3 -- "0x301, 0x302, 0x303" --> CAN
         E4 -- "0x401, 0x402" --> CAN
         
-        CAN --> GW[Gateway ECU 0x501/0x502]
+        CAN --> GW["Gateway ECU 0x501/0x502"]
         GW --> CAN
     end
 
     subgraph "Twin & Anomaly Layer"
-        CAN --> DT[Digital Twin Ingestion & Sync]
-        CAN --> FD[Rule-Based Fault Detector]
-        FE[Fault Engine Injector] -. Injects faults .-> VM
+        CAN --> DT["Digital Twin Ingestion & Sync"]
+        CAN --> FD["Rule-Based Fault Detector"]
+        FE["Fault Engine Injector"] -. Injects faults .-> VM
     end
 
     subgraph "IPC & Persistence Layer"
-        DT -- 10 Hz State Snapshot --> IPC[(Shared JSON / SQLite DB)]
+        DT -- 10 Hz State Snapshot --> IPC[("Shared JSON / SQLite DB")]
         FD -- Real-time Fault Events --> IPC
         CAN -- Ring Buffer Frames --> IPC
     end
 
     subgraph "Application Layer"
-        IPC --> API[FastAPI Backend / REST & WS]
-        API --> UI[React 18 + TypeScript Dashboard]
+        IPC --> API["FastAPI Backend / REST & WS"]
+        API --> UI["React 18 + TypeScript Dashboard"]
     end
 ```
 

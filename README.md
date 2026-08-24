@@ -17,7 +17,7 @@ Modern vehicle development relies heavily on **Software-in-the-Loop (SIL)** envi
 
 **VECU-Twin** simulates an entire automotive subsystem in software without requiring physical microcontrollers, Arduino, Raspberry Pi, CAN adapters, or OBD hardware:
 
-$$\text{Virtual ECUs} \longrightarrow \text{CAN Bus Arbitration} \longrightarrow \text{Vehicle Physics} \longrightarrow \text{Digital Twin} \longrightarrow \text{Fault Injection \& Detection} \longrightarrow \text{Live Dashboard}$$
+> **Virtual ECUs** ➔ **CAN Bus Priority Arbitration** ➔ **Vehicle Physics** ➔ **Digital Twin** ➔ **Fault Injection & Detection** ➔ **Live Dashboard**
 
 ---
 
@@ -26,35 +26,35 @@ $$\text{Virtual ECUs} \longrightarrow \text{CAN Bus Arbitration} \longrightarrow
 ```mermaid
 flowchart TD
     subgraph "Virtual Subsystem Layer (C++17)"
-        VM[Vehicle Kinematic & Thermal Model] --> E1[Engine ECU (0x101-0x103)]
-        VM --> E2[Brake ECU (0x201-0x203)]
-        VM --> E3[Battery ECU (0x301-0x303)]
-        VM --> E4[Steering ECU (0x401-0x402)]
+        VM["Vehicle Kinematic & Thermal Model"] --> E1["Engine ECU (0x101-0x103)"]
+        VM --> E2["Brake ECU (0x201-0x203)"]
+        VM --> E3["Battery ECU (0x301-0x303)"]
+        VM --> E4["Steering ECU (0x401-0x402)"]
 
-        E1 -- Publish --> CAN[Software CAN Bus / Priority Arbitration]
+        E1 -- Publish --> CAN["Software CAN Bus / Priority Arbitration"]
         E2 -- Publish --> CAN
         E3 -- Publish --> CAN
         E4 -- Publish --> CAN
 
-        CAN --> GW[Gateway ECU (0x501-0x502)]
+        CAN --> GW["Gateway ECU (0x501-0x502)"]
         GW -- Heartbeats & Stats --> CAN
     end
 
     subgraph "Twin & Supervisory Layer"
-        CAN --> DT[Digital Twin Ingestion & Range Validation]
-        CAN --> FD[Transparent Rule-Based Fault Detector]
-        FE[Fault Injection Engine] -. Injects Anomaly .-> VM
+        CAN --> DT["Digital Twin Ingestion & Range Validation"]
+        CAN --> FD["Transparent Rule-Based Fault Detector"]
+        FE["Fault Injection Engine"] -. Injects Anomaly .-> VM
     end
 
     subgraph "IPC & Persistence Layer"
-        DT -- 10 Hz Telemetry Snapshot --> IPC[(Shared IPC / SQLite WAL DB)]
+        DT -- 10 Hz Telemetry Snapshot --> IPC[("Shared IPC / SQLite WAL DB")]
         FD -- Real-time Fault Events --> IPC
         CAN -- Rolling Frame Buffer --> IPC
     end
 
     subgraph "Application & Presentation Layer"
-        IPC --> API[FastAPI Backend / REST & WebSockets]
-        API --> UI[React 18 + TypeScript Automotive Dashboard]
+        IPC --> API["FastAPI Backend / REST & WebSockets"]
+        API --> UI["React 18 + TypeScript Automotive Dashboard"]
     end
 ```
 
