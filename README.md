@@ -224,23 +224,57 @@ cmake --build build --config Release
 ## 7. Running Automated Test Suites
 
 ```bash
-# 1. Run Python API & Storage Tests (100% Pass)
+# 1. Run Python API & Storage Tests (52 passed)
 pytest python/tests/ -v
 
 # 2. Run C++ Concurrency & Kinematics Tests
 cd build && ctest --output-on-failure
+
+# 3. Build & Typecheck Frontend
+cd frontend && npm run build
 ```
 
 ---
 
-## 8. Limitations & Scope
+## 8. Technical Documentation & Guides
+
+Comprehensive technical guides are available in the [`docs/`](docs/) directory:
+
+| Document | Description |
+|---|---|
+| 📖 [Architecture Specification](docs/architecture.md) | High-level system architecture, threading models, and IPC design. |
+| ⚡ [Virtual ECU Guide](docs/virtual_ecu.md) | State machines, update loops, and telemetry calculation for all 5 ECUs. |
+| 🌐 [CAN Communication](docs/can_communication.md) | Software CAN arbitration, MPSC queues, message encoding, and DBC layout. |
+| 🚗 [Vehicle Kinematics](docs/vehicle_model.md) | Powertrain physics, acceleration/braking formulas, and thermal balance. |
+| 🪞 [Digital Twin](docs/digital_twin.md) | Shadow state synchronization, validity checking, and freshness tracking. |
+| ⚠️ [Fault Injection](docs/fault_injection.md) | Deterministic fault triggers, DTC catalogs, and detection threshold rules. |
+| 🧪 [Testing Guide](docs/testing.md) | Unit test strategy, integration coverage, and CI verification procedures. |
+| 💼 [Interview Defense Guide](docs/interview_guide.md) | 25+ technical interview Q&As covering design choices, SIL/HIL, and embedded systems. |
+
+---
+
+## 9. Simulation Scenario Catalog
+
+Preset test scenarios located in [`examples/`](examples/):
+
+* **`NORMAL_DRIVE`**: Standard cruising condition (~60 km/h, 2,000 RPM, balanced battery discharge).
+* **`ACCELERATION`**: Full throttle profile (0 to 120 km/h, engine RPM ramping to 4,500).
+* **`BRAKING`**: Emergency brake application (speed deceleration at 15 km/h/s, 45 bar hydraulic pressure).
+* **`ENGINE_OVERHEAT`**: Thermal runaway injection (engine temp exceeding 110°C warning and 130°C critical threshold).
+* **`BRAKE_FAILURE`**: Hydraulic line loss simulation (pedal depressed but line pressure fails to build).
+* **`BATTERY_FAULT`**: Rapid cell degradation simulation (voltage droop and high discharge rate).
+* **`COMMUNICATION_LOSS`**: Node silence condition (CAN frame timeout detection by Central Gateway).
+
+---
+
+## 10. Limitations & Scope
 
 - **Software-Only Abstraction**: Simulates message-level CAN frame priority and payload handling; does not simulate physical transceiver voltage levels (dominant/recessive bit timing).
 - **Vehicle Model**: Focused on powertrain, braking, battery, and steering dynamics. Aerodynamics and multi-body tire traction models are intentionally simplified to maintain determinism.
 
 ---
 
-## 9. Future Roadmap
+## 11. Future Roadmap
 
 - [ ] Linux **SocketCAN** (`vcan0`) driver integration.
 - [ ] AUTOSAR Classic RTE C++ interface binding.
@@ -249,6 +283,6 @@ cd build && ctest --output-on-failure
 
 ---
 
-## 10. License
+## 12. License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
