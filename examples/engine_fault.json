@@ -1,0 +1,10 @@
+{
+  "name": "Engine Overheat Fault Scenario",
+  "description": "Induces excessive thermal accumulation in the Engine ECU exceeding critical thresholds.",
+  "scenario_id": "ENGINE_OVERHEAT",
+  "faults_injected": ["ENGINE_OVERHEAT"],
+  "expected_values": {
+    "engine_temperature_c": { "min": 125.0, "max": 160.0 },
+    "expected_faults": ["ENGINE_OVERHEAT"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Acceleration Scenario",
+  "description": "Gradual throttle engagement leading to high speed and RPM rise.",
+  "scenario_id": "ACCELERATION",
+  "expected_values": {
+    "speed_kmh": { "min": 60.0, "max": 160.0 },
+    "rpm": { "min": 3500, "max": 6500 },
+    "engine_temperature_c": { "min": 85.0, "max": 105.0 },
+    "brake_active": false,
+    "expected_faults": []
+  }
+}

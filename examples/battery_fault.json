@@ -1,0 +1,10 @@
+{
+  "name": "Battery Degradation Fault Scenario",
+  "description": "Rapid battery SOC drop triggering warning and critical state alerts.",
+  "scenario_id": "BATTERY_FAULT",
+  "faults_injected": ["BATTERY_DEGRADATION"],
+  "expected_values": {
+    "battery_pct": { "min": 0.0, "max": 20.0 },
+    "expected_faults": ["BATTERY_LOW"]
+  }
+}

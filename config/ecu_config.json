@@ -1,0 +1,54 @@
+{
+  "ecus": [
+    {
+      "id": "ENGINE_ECU",
+      "name": "Engine ECU",
+      "ecu_id": 1,
+      "update_frequency_hz": 10,
+      "can_id_base": "0x100",
+      "enabled": true,
+      "description": "Manages engine RPM, temperature, load, and state"
+    },
+    {
+      "id": "BRAKE_ECU",
+      "name": "Brake ECU",
+      "ecu_id": 2,
+      "update_frequency_hz": 20,
+      "can_id_base": "0x200",
+      "enabled": true,
+      "description": "Manages brake state, pressure, and vehicle speed"
+    },
+    {
+      "id": "BATTERY_ECU",
+      "name": "Battery ECU",
+      "ecu_id": 3,
+      "update_frequency_hz": 5,
+      "can_id_base": "0x300",
+      "enabled": true,
+      "description": "Manages battery percentage, voltage, temperature, and charging state"
+    },
+    {
+      "id": "STEERING_ECU",
+      "name": "Steering ECU",
+      "ecu_id": 4,
+      "update_frequency_hz": 20,
+      "can_id_base": "0x400",
+      "enabled": true,
+      "description": "Manages steering angle and direction"
+    },
+    {
+      "id": "GATEWAY_ECU",
+      "name": "Gateway ECU",
+      "ecu_id": 5,
+      "update_frequency_hz": 10,
+      "can_id_base": "0x500",
+      "enabled": true,
+      "description": "Central gateway: monitors, forwards, and tracks all ECU communication"
+    }
+  ],
+  "gateway": {
+    "communication_timeout_ms": 2000,
+    "forward_all": true,
+    "monitored_ecus": ["ENGINE_ECU", "BRAKE_ECU", "BATTERY_ECU", "STEERING_ECU"]
+  }
+}

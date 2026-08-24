@@ -1,0 +1,133 @@
+{
+  "faults": [
+    {
+      "id": "ENGINE_OVERHEAT",
+      "name": "Engine Overheating",
+      "target_ecu": "ENGINE_ECU",
+      "description": "Simulates engine temperature rising beyond safe operating limits",
+      "parameters": {
+        "heat_rate_multiplier": 5.0,
+        "target_temp_c": 145.0
+      },
+      "detection_rule": {
+        "field": "engine_temperature",
+        "operator": "gt",
+        "warning_threshold": 110.0,
+        "critical_threshold": 130.0
+      }
+    },
+    {
+      "id": "ENGINE_RPM_FAULT",
+      "name": "Engine RPM Runaway",
+      "target_ecu": "ENGINE_ECU",
+      "description": "Simulates abnormally high engine RPM",
+      "parameters": {
+        "target_rpm": 7500,
+        "ramp_rate": 200
+      },
+      "detection_rule": {
+        "field": "rpm",
+        "operator": "gt",
+        "warning_threshold": 6000,
+        "critical_threshold": 7000
+      }
+    },
+    {
+      "id": "BRAKE_FAILURE",
+      "name": "Brake Pressure Failure",
+      "target_ecu": "BRAKE_ECU",
+      "description": "Brake command issued but pressure does not build — simulates hydraulic failure",
+      "parameters": {
+        "pressure_response_factor": 0.05
+      },
+      "detection_rule": {
+        "field": "brake_pressure",
+        "condition": "brake_active_but_pressure_low",
+        "pressure_threshold_bar": 5.0,
+        "warning_threshold": 1,
+        "critical_threshold": 1
+      }
+    },
+    {
+      "id": "BATTERY_DEGRADATION",
+      "name": "Battery Rapid Degradation",
+      "target_ecu": "BATTERY_ECU",
+      "description": "Battery percentage drops at an abnormally high rate",
+      "parameters": {
+        "drain_rate_multiplier": 20.0
+      },
+      "detection_rule": {
+        "field": "battery_percentage",
+        "operator": "lt",
+        "warning_threshold": 20.0,
+        "critical_threshold": 10.0
+      }
+    },
+    {
+      "id": "SENSOR_STUCK",
+      "name": "Sensor Stuck Value",
+      "target_ecu": "ENGINE_ECU",
+      "description": "ECU continuously sends the same value — simulates a frozen sensor",
+      "parameters": {
+        "stuck_field": "rpm",
+        "stuck_value": 2400
+      },
+      "detection_rule": {
+        "condition": "value_unchanged_for_ms",
+        "threshold_ms": 3000
+      }
+    },
+    {
+      "id": "COMMUNICATION_LOSS",
+      "name": "ECU Communication Loss",
+      "target_ecu": "ENGINE_ECU",
+      "description": "Stops messages from the target ECU to simulate communication failure",
+      "parameters": {
+        "silence_all_messages": true
+      },
+      "detection_rule": {
+        "condition": "no_messages_for_ms",
+        "threshold_ms": 2000
+      }
+    },
+    {
+      "id": "ECU_DELAYED",
+      "name": "ECU Message Delay",
+      "target_ecu": "BRAKE_ECU",
+      "description": "Introduces controlled delay in ECU message transmission",
+      "parameters": {
+        "delay_ms": 1500
+      },
+      "detection_rule": {
+        "condition": "message_delay_ms",
+        "warning_threshold_ms": 500,
+        "critical_threshold_ms": 1000
+      }
+    },
+    {
+      "id": "INCONSISTENT_STATE",
+      "name": "Inconsistent Vehicle State",
+      "target_ecu": "ENGINE_ECU",
+      "description": "Generates conflicting values — e.g. low speed but very high RPM",
+      "parameters": {
+        "force_rpm": 6000,
+        "expected_speed_max_kmh": 10.0
+      },
+      "detection_rule": {
+        "condition": "speed_rpm_mismatch",
+        "rpm_per_kmh_ratio_max": 200
+      }
+    }
+  ],
+  "severity_levels": {
+    "NORMAL": 0,
+    "WARNING": 1,
+    "CRITICAL": 2
+  },
+  "detection": {
+    "evaluation_interval_ms": 500,
+    "ecu_timeout_ms": 2000,
+    "stuck_value_window_ms": 3000,
+    "speed_rpm_mismatch_ratio": 200
+  }
+}

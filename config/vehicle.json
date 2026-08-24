@@ -1,0 +1,40 @@
+{
+  "vehicle": {
+    "name": "VECU-Twin Demo Vehicle",
+    "type": "Passenger Car",
+    "year": 2024
+  },
+  "limits": {
+    "speed_max_kmh": 250.0,
+    "speed_min_kmh": 0.0,
+    "rpm_max": 8000,
+    "rpm_idle": 800,
+    "rpm_min": 0,
+    "engine_temp_normal_min_c": 60.0,
+    "engine_temp_normal_max_c": 100.0,
+    "engine_temp_warning_c": 110.0,
+    "engine_temp_critical_c": 130.0,
+    "engine_temp_max_c": 150.0,
+    "steering_angle_max_deg": 540.0,
+    "steering_angle_safe_deg": 480.0,
+    "brake_pressure_max_bar": 150.0,
+    "battery_voltage_nominal_v": 400.0,
+    "battery_voltage_min_v": 280.0,
+    "battery_voltage_max_v": 420.0,
+    "battery_temp_normal_max_c": 45.0,
+    "battery_temp_warning_c": 55.0,
+    "battery_temp_critical_c": 65.0,
+    "battery_pct_warning": 20.0,
+    "battery_pct_critical": 10.0
+  },
+  "physics": {
+    "acceleration_rate_kmh_per_s": 8.0,
+    "deceleration_rate_kmh_per_s": 15.0,
+    "engine_heat_rate_c_per_s": 0.5,
+    "engine_cool_rate_c_per_s": 0.3,
+    "battery_drain_rate_pct_per_min": 0.15,
+    "battery_charge_rate_pct_per_min": 0.5,
+    "rpm_per_kmh": 35.0
+  },
+  "modes": ["IDLE", "DRIVING", "ACCELERATING", "BRAKING", "FAULT"]
+}

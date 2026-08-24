@@ -1,0 +1,14 @@
+{
+  "name": "Normal Drive Scenario",
+  "description": "Standard suburban cruising scenario at moderate speed and nominal temperatures.",
+  "scenario_id": "NORMAL_DRIVE",
+  "expected_values": {
+    "speed_kmh": { "min": 55.0, "max": 75.0 },
+    "rpm": { "min": 2000, "max": 3000 },
+    "engine_temperature_c": { "min": 70.0, "max": 95.0 },
+    "battery_pct": { "min": 50.0, "max": 100.0 },
+    "brake_active": false,
+    "steering_angle_deg": { "min": -15.0, "max": 15.0 },
+    "expected_faults": []
+  }
+}

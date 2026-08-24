@@ -1,0 +1,12 @@
+{
+  "name": "Braking Scenario",
+  "description": "Brake pressure application causing speed deceleration to near standstill.",
+  "scenario_id": "BRAKING",
+  "expected_values": {
+    "speed_kmh": { "min": 0.0, "max": 40.0 },
+    "rpm": { "min": 750, "max": 1200 },
+    "brake_active": true,
+    "brake_pressure_bar": { "min": 20.0, "max": 100.0 },
+    "expected_faults": []
+  }
+}

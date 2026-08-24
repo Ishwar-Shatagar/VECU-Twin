@@ -1,0 +1,108 @@
+{
+  "messages": [
+    {
+      "can_id": "0x101",
+      "name": "ENGINE_RPM",
+      "source": "ENGINE_ECU",
+      "dlc": 8,
+      "period_ms": 100,
+      "description": "Engine RPM value (bytes 0-1 = RPM uint16, byte 2 = load %, byte 3 = state)"
+    },
+    {
+      "can_id": "0x102",
+      "name": "ENGINE_TEMP",
+      "source": "ENGINE_ECU",
+      "dlc": 8,
+      "period_ms": 200,
+      "description": "Engine temperature in 0.1°C units (bytes 0-1 = temp int16)"
+    },
+    {
+      "can_id": "0x103",
+      "name": "ENGINE_STATUS",
+      "source": "ENGINE_ECU",
+      "dlc": 8,
+      "period_ms": 500,
+      "description": "Engine overall status (byte 0 = state, byte 1 = fault flags)"
+    },
+    {
+      "can_id": "0x201",
+      "name": "BRAKE_STATUS",
+      "source": "BRAKE_ECU",
+      "dlc": 8,
+      "period_ms": 50,
+      "description": "Brake state (byte 0 = active 0/1, byte 1 = fault flags)"
+    },
+    {
+      "can_id": "0x202",
+      "name": "BRAKE_PRESSURE",
+      "source": "BRAKE_ECU",
+      "dlc": 8,
+      "period_ms": 50,
+      "description": "Brake pressure in 0.1 bar units (bytes 0-1 = pressure uint16)"
+    },
+    {
+      "can_id": "0x203",
+      "name": "VEHICLE_SPEED",
+      "source": "BRAKE_ECU",
+      "dlc": 8,
+      "period_ms": 100,
+      "description": "Vehicle speed in 0.1 km/h units (bytes 0-1 = speed uint16)"
+    },
+    {
+      "can_id": "0x301",
+      "name": "BATTERY_STATUS",
+      "source": "BATTERY_ECU",
+      "dlc": 8,
+      "period_ms": 200,
+      "description": "Battery status (byte 0 = percentage, byte 1 = charging 0/1, byte 2 = fault)"
+    },
+    {
+      "can_id": "0x302",
+      "name": "BATTERY_TEMP",
+      "source": "BATTERY_ECU",
+      "dlc": 8,
+      "period_ms": 500,
+      "description": "Battery temperature in 0.1°C (bytes 0-1 = temp int16)"
+    },
+    {
+      "can_id": "0x303",
+      "name": "BATTERY_VOLTAGE",
+      "source": "BATTERY_ECU",
+      "dlc": 8,
+      "period_ms": 500,
+      "description": "Battery voltage in 0.1V units (bytes 0-1 = voltage uint16)"
+    },
+    {
+      "can_id": "0x401",
+      "name": "STEERING_ANGLE",
+      "source": "STEERING_ECU",
+      "dlc": 8,
+      "period_ms": 50,
+      "description": "Steering angle in 0.1° units (bytes 0-1 = angle int16 signed)"
+    },
+    {
+      "can_id": "0x402",
+      "name": "STEERING_STATUS",
+      "source": "STEERING_ECU",
+      "dlc": 8,
+      "period_ms": 200,
+      "description": "Steering status (byte 0 = direction -1/0/1, byte 1 = fault)"
+    },
+    {
+      "can_id": "0x501",
+      "name": "GATEWAY_STATUS",
+      "source": "GATEWAY_ECU",
+      "dlc": 8,
+      "period_ms": 1000,
+      "description": "Gateway network health report (bytes 0-4 = ECU health flags)"
+    },
+    {
+      "can_id": "0x502",
+      "name": "GATEWAY_STATS",
+      "source": "GATEWAY_ECU",
+      "dlc": 8,
+      "period_ms": 1000,
+      "description": "CAN message statistics (bytes 0-3 = total messages uint32)"
+    }
+  ]
+}
